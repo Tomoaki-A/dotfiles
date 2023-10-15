@@ -26,6 +26,14 @@ source ~/dotfiles/zsh/util.zsh
 
 # VSCode
 
+## setting symbolic link
+
+```
+cd ~/Library/Application\ Support/Code\ -\ Insiders/User/
+ln -s ~/dotfiles/vscode/settings.json ./settings.json
+ln -s ~/dotfiles/vscode/keybindings.json ./keybindings.json
+```
+
 ## install extensions
 
 ```
