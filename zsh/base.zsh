@@ -1,11 +1,6 @@
 # change directory
 alias cdd='cd ~/Desktop'
 
-# package manager
-alias n='npm'
-alias y='yarn'
-alias p='pnpm'
-
 # zsh
 alias zupd='source ~/.zshrc'
 
