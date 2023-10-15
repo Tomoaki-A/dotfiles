@@ -26,14 +26,14 @@ source ~/dotfiles/zsh/util.zsh
 
 # VSCode
 
-## 一覧をインストール
+## install extensions
 
 ```
 cd vscode
 sh install_extensions.sh
 ```
 
-## 拡張機能の一覧更新
+## update extensions
 
 ```
 code-insiders --list-extensions > vscode/extensions
