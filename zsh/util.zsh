@@ -1,0 +1,1 @@
+alias lint='eslint --fix'
