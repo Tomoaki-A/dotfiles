@@ -10,14 +10,14 @@
 ~/zshrc
 
 # base
-source ~/setting-file/zsh/base.zsh
+source ~/system-settings/zsh/base.zsh
 
 # git
-source ~/setting-file/zsh/git-alias.zsh
+source ~/system-settings/zsh/git-alias.zsh
 
 # pacage manager
-source ~/setting-file/zsh/package-manager.zsh
+source ~/system-settings/zsh/package-manager.zsh
 
 # util
-source ~/setting-file/zsh/util.zsh
+source ~/system-settings/zsh/util.zsh
 ```
