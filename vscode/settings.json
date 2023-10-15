@@ -1,0 +1,23 @@
+{
+  "workbench.colorTheme": "GitHub Dark Colorblind (Beta)",
+  "settingsSync.ignoredExtensions": [],
+  "editor.inlineSuggest.enabled": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.implementationsCodeLens.enabled": true,
+  "git.enableSmartCommit": true,
+  "editor.formatOnSave": true,
+  "workbench.iconTheme": "vscode-icons",
+  "git.autofetch": true,
+  "typescript.referencesCodeLens.showOnAllFunctions": true,
+  "javascript.referencesCodeLens.showOnAllFunctions": true,
+  "javascript.referencesCodeLens.enabled": true,
+  "typescript.referencesCodeLens.enabled": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "cSpell.userWords": ["Vocaloid"],
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "vscode-neovim.neovimExecutablePaths.linux": "/opt/homebrew/bin/nvim",
+  "projectManager.sortList": "Saved",
+  "diffEditor.ignoreTrimWhitespace": false
+}
