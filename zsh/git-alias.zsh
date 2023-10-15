@@ -1,0 +1,5 @@
+alias gpo='git push origin'
+alias gcm='git commit -m'
+alias gm='git merge'
+alias gma='git merge --abort'
+alias gco='git checkout'
