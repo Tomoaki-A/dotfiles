@@ -12,16 +12,16 @@
 ~/zshrc
 
 # base
-source ~/system-settings/zsh/base.zsh
+source ~/dotfiles/zsh/base.zsh
 
 # git
-source ~/system-settings/zsh/git-alias.zsh
+source ~/dotfiles/zsh/git-alias.zsh
 
 # pacage manager
-source ~/system-settings/zsh/package-manager.zsh
+source ~/dotfiles/zsh/package-manager.zsh
 
 # util
-source ~/system-settings/zsh/util.zsh
+source ~/dotfiles/zsh/util.zsh
 ```
 
 # VSCode
