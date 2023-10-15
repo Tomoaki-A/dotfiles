@@ -1,0 +1,4 @@
+# Settings
+
+- VSCode
+- NeoVim
