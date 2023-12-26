@@ -8,8 +8,13 @@ Plug('neoclide/coc.nvim', {branch = 'release'})
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
 
+-- telescope
 Plug ('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 
+-- theme
 Plug 'projekt0n/github-nvim-theme'
+
+-- ime
+Plug 'keaising/im-select.nvim'
 
 vim.call('plug#end')
