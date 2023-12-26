@@ -17,4 +17,8 @@ Plug 'projekt0n/github-nvim-theme'
 -- ime
 Plug 'keaising/im-select.nvim'
 
+-- fuzzy finder
+Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install()']})
+Plug 'junegunn/fzf.vim'
+
 vim.call('plug#end')
