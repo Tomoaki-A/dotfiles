@@ -21,4 +21,7 @@ Plug 'keaising/im-select.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug ('nvim-telescope/telescope.nvim', { tag = '0.1.5' })
 
+-- tab
+Plug 'romgrk/barbar.nvim'
+
 vim.call('plug#end')
