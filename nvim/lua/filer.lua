@@ -1,9 +1,17 @@
 -- https://github.com/nvim-tree/nvim-tree.lua
+-- [[
+-- Tips @see :h nvim-tree.lua
+-- 'a' ファイル/ディレクトリの新規作成
+-- 'e' ファイル/ディレクトリの名前変更
+-- 'd' ファイル/ディレクトリの削除
+-- 'y' ファイル/ディレクトリのコピー
+-- 'Y' ファイル/ディレクトリの相対パスでのコピー
+-- ]]
 
 -- デフォルトのファイラーをdisableにする
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
- 
+
 local function my_on_attach(bufnr)
   local api = require "nvim-tree.api"
 
@@ -93,4 +101,3 @@ require('nvim-web-devicons').setup {
   }
  };
 }
-
