@@ -1,4 +1,5 @@
 require('plugins')
+require('keybinds')
 require('coc')
 require('filer')
 require('options')
