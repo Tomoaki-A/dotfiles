@@ -1,14 +1,22 @@
--- disable netrw at the very start of your init.lua
+-- https://github.com/nvim-tree/nvim-tree.lua
+
+-- デフォルトのファイラーをdisableにする
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+ 
+local function my_on_attach(bufnr)
+  local api = require "nvim-tree.api"
 
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
 
--- empty setup using defaults
-require("nvim-tree").setup()
+  api.config.mappings.default_on_attach(bufnr)
+  -- fに割り当てられているkeymapを削除
+  vim.keymap.del("n", "f", {buffer = bufnr})
+end
 
--- OR setup with some options
+-- nvim-treeの設定
 require("nvim-tree").setup({
   sort = {
     sorter = "case_sensitive",
@@ -22,11 +30,11 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = true,
   },
+  on_attach = my_on_attach,
 })
+
+-- nvim-web-deviconsの設定
 require('nvim-web-devicons').setup {
- -- your personnal icons can go here (to override)
- -- you can specify color or cterm_color instead of specifying both of them
- -- DevIcon will be appended to `name`
  override = {
   ts = {
     icon = "󰛦",
@@ -35,19 +43,9 @@ require('nvim-web-devicons').setup {
     name = "TypeScript"
   }
  };
- -- globally enable different highlight colors per icon (default to true)
- -- if set to false all icons will have the default icon's color
  color_icons = true;
- -- globally enable default icons (default to false)
- -- will get overriden by `get_icons` option
  default = true;
- -- globally enable "strict" selection of icons - icon will be looked up in
- -- different tables, first by filename, and if not found by extension; this
- -- prevents cases when file doesn't have any extension but still gets some icon
- -- because its name happened to match some extension (default to false)
  strict = true;
- -- same as `override` but specifically for overrides by filename
- -- takes effect when `strict` is true
  override_by_filename = {
   [".gitignore"] = {
     icon = "",
@@ -55,8 +53,6 @@ require('nvim-web-devicons').setup {
     name = "Gitignore"
   }
  };
- -- same as `override` but specifically for overrides by extension
- -- takes effect when `strict` is true
  override_by_extension = {
   ["log"] = {
     icon = "",
@@ -66,4 +62,3 @@ require('nvim-web-devicons').setup {
  };
 }
 
-vim.api.nvim_set_keymap("n", "<C-h>", ":NvimTreeToggle<cr>", {silent = true, noremap = true})
