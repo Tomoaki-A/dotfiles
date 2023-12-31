@@ -26,6 +26,22 @@ require("nvim-tree").setup({
   },
   renderer = {
     group_empty = true,
+    highlight_git = true,
+    highlight_diagnostics = true,
+    highlight_modified = "all",
+    icons = {
+      glyphs = {
+        git = {
+          unstaged = "●",
+          staged = "",
+          unmerged = "",
+          renamed = "➜",
+          untracked = "★",
+          deleted = "",
+          ignored = "◌",
+        },
+      },
+    },
   },
   filters = {
     dotfiles = true,
