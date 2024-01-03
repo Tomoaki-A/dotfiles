@@ -23,5 +23,7 @@ Plug ('nvim-telescope/telescope.nvim', { tag = '0.1.5' })
 
 -- tab
 Plug 'romgrk/barbar.nvim'
+-- terminal
+Plug ('akinsho/toggleterm.nvim', {tag = '*'})
 
 vim.call('plug#end')
