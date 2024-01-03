@@ -23,6 +23,9 @@ Plug ('nvim-telescope/telescope.nvim', { tag = '0.1.5' })
 
 -- tab
 Plug 'romgrk/barbar.nvim'
+
+-- git
+Plug 'kdheepak/lazygit.nvim'
 -- terminal
 Plug ('akinsho/toggleterm.nvim', {tag = '*'})
 
