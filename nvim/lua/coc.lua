@@ -5,7 +5,9 @@ vim.g.coc_global_extensions = {
   'coc-git',
   'coc-fzf-preview',
   'coc-lists',
-  'coc-copilot'
+  'coc-copilot',
+  'coc-json',
+  'coc-yaml',
 }
 
 vim.cmd([[
