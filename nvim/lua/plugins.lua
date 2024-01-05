@@ -28,5 +28,7 @@ Plug 'romgrk/barbar.nvim'
 Plug 'kdheepak/lazygit.nvim'
 -- terminal
 Plug ('akinsho/toggleterm.nvim', {tag = '*'})
+Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-flog'
 
 vim.call('plug#end')
