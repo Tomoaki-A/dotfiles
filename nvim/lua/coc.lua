@@ -8,6 +8,7 @@ vim.g.coc_global_extensions = {
   'coc-copilot',
   'coc-json',
   'coc-yaml',
+  'coc-spell-checker',
 }
 
 vim.cmd([[
