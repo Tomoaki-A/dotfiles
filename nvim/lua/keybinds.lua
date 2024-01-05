@@ -15,3 +15,6 @@ vim.keymap.set('n', '<Space>fg', require('telescope.builtin').live_grep, {})
 -- git
 vim.keymap.set('n', '<Space>g', ':LazyGit<cr>', {silent = true, noremap = true})
 vim.keymap.set('n', '<Space>gg', ':Flog<cr>', {silent = true, noremap = true})
+
+-- terminal
+vim.keymap.set('n', '<Space>t', ':ToggleTerm<cr>', {silent = true, noremap = true})
