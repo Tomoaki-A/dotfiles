@@ -25,7 +25,7 @@ vim.keymap.set('n', '<Space>t', ':ToggleTerm<cr>', {silent = true, noremap = tru
 vim.keymap.set('n', 'gd', '<Plug>(coc-definition)')
 vim.keymap.set('n', 'gy', '<Plug>(coc-type-definition)')
 vim.keymap.set('n', 'gi', '<Plug>(coc-implementation)')
-vim.keymap.set('n', 'gr', '<Plug>(coc-references)')
+vim.keymap.set('n', 'gr', ':CocCommand fzf-preview.CocReferences<cr>')
 
 -- tab
 -- @memo タブを移動するときに、nvim-treeのファイルを開く
