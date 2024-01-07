@@ -24,3 +24,8 @@ vim.keymap.set('n', 'gd', '<Plug>(coc-definition)')
 vim.keymap.set('n', 'gy', '<Plug>(coc-type-definition)')
 vim.keymap.set('n', 'gi', '<Plug>(coc-implementation)')
 vim.keymap.set('n', 'gr', '<Plug>(coc-references)')
+
+-- tab
+vim.keymap.set('n', '<C-,>', ':BufferPrevious<cr>', {silent = true, noremap = true})
+vim.keymap.set('n', '<C-.>', ':BufferNext<cr>', {silent = true, noremap = true})
+vim.keymap.set('n', '<C-c>', ':BufferClose<cr>', {silent = true, noremap = true})
