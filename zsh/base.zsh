@@ -2,6 +2,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # change directory
 alias cdd='cd ~/Desktop'
+alias cddot='cd ~/dotfiles'
 
 # zsh
 alias zupd='source ~/.zshrc'
