@@ -8,6 +8,11 @@ os:
   editPreset: "nvim"
 
 customCommands:
+  - key: "C"
+    context: "files"
+    description: 'commit files with aicommits'
+    subprocess: true
+    command: "aicommits --type conventional --generate 3"
   - key: "c"
     context: "files"
     description: 'commit files with gitmoji'
