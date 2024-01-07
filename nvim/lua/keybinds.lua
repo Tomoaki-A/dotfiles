@@ -26,6 +26,8 @@ vim.keymap.set('n', 'gi', '<Plug>(coc-implementation)')
 vim.keymap.set('n', 'gr', '<Plug>(coc-references)')
 
 -- tab
-vim.keymap.set('n', '<C-,>', ':BufferPrevious<cr>', {silent = true, noremap = true})
-vim.keymap.set('n', '<C-.>', ':BufferNext<cr>', {silent = true, noremap = true})
+-- @memo タブを移動するときに、nvim-treeのファイルを開く
+vim.keymap.set('n', '<C-,>', [[:BufferPrevious<cr>:lua require'nvim-tree.api'.tree.find_file({ open = true, focus = false, })<cr>]], {silent = true, noremap = true})
+vim.keymap.set('n', '<C-.>', [[:BufferNext<cr>:lua require'nvim-tree.api'.tree.find_file({ open = true, focus = false, })<cr>]], {silent = true, noremap = true})
+
 vim.keymap.set('n', '<C-c>', ':BufferClose<cr>', {silent = true, noremap = true})
