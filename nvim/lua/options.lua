@@ -21,3 +21,9 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
     vim.api.nvim_buf_set_option(0, 'shiftwidth', 0)
   end,
 })
+
+-- swap filesを作らない
+vim.api.nvim_exec([[
+  set noswapfile
+
+]], false)
