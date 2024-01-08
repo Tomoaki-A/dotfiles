@@ -5,7 +5,9 @@ gui:
   showIcons: true
 
 os:
-  editPreset: "nvim"
+  editCommand: ""
+  editCommandTemplate: 'nvim {{filename}}'
+  # editCommandTemplate: 'nvim --listen /tmp/nvim-server.pipe --server /tmp/nvim-server.pipe --remote-tab "$(pwd)/{{filename}}"'
 
 customCommands:
   - key: "C"
