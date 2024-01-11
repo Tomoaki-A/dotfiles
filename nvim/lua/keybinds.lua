@@ -18,9 +18,6 @@ vim.keymap.set('n', '<Space>fg', require('telescope.builtin').live_grep, {})
 vim.keymap.set('n', '<Space>g', ':LazyGit<cr>', {silent = true, noremap = true})
 vim.keymap.set('n', '<Space>gg', ':Flog<cr>', {silent = true, noremap = true})
 
--- terminal
-vim.keymap.set('n', '<Space>t', ':ToggleTerm<cr>', {silent = true, noremap = true})
-
 -- coc
 vim.keymap.set('n', 'gd', '<Plug>(coc-definition)')
 vim.keymap.set('n', 'gy', '<Plug>(coc-type-definition)')
