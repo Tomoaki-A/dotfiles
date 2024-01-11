@@ -33,4 +33,7 @@ Plug 'rbong/vim-flog'
 -- terminal
 Plug ('akinsho/toggleterm.nvim', {tag = '*'})
 
+-- indent
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 vim.call('plug#end')
