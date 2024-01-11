@@ -7,6 +7,9 @@ alias cddot='cd ~/dotfiles'
 # zsh
 alias zupd='source ~/.zshrc'
 
+# vscode
+alias code='code-insiders .'
+
 # terminal
 autoload -Uz vcs_info
 setopt prompt_subst
