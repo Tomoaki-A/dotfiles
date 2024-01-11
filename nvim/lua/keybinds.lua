@@ -26,7 +26,7 @@ vim.keymap.set('n', 'gr', ':CocCommand fzf-preview.CocReferences<cr>')
 
 -- tab
 -- @memo タブを移動するときに、nvim-treeのファイルを開く
-vim.keymap.set('n', '<C-,>', [[:BufferPrevious<cr>:lua require'nvim-tree.api'.tree.find_file({ open = true, focus = false, })<cr>]], {silent = true, noremap = true})
-vim.keymap.set('n', '<C-.>', [[:BufferNext<cr>:lua require'nvim-tree.api'.tree.find_file({ open = true, focus = false, })<cr>]], {silent = true, noremap = true})
+vim.keymap.set('n', '<C-,>', [[:BufferPrevious<cr>:lua require'nvim-tree.api'.tree.find_file({ open = true, focus = false, })<cr>]], {silent = false, noremap = true})
+vim.keymap.set('n', '<C-.>', [[:BufferNext<cr>:lua require'nvim-tree.api'.tree.find_file({ open = true, focus = false, })<cr>]], {silent = false, noremap = true})
 
 vim.keymap.set('n', '<C-c>', ':BufferClose<cr>', {silent = true, noremap = true})
