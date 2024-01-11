@@ -27,3 +27,5 @@ vim.api.nvim_exec([[
   set noswapfile
 
 ]], false)
+
+vim.opt.laststatus = 3
