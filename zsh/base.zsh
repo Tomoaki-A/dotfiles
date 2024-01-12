@@ -10,6 +10,8 @@ alias zupd='source ~/.zshrc'
 # vscode
 alias code='code-insiders .'
 
+alias e='exit'
+
 # terminal
 autoload -Uz vcs_info
 setopt prompt_subst
