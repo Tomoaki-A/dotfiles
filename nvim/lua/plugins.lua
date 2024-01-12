@@ -36,4 +36,7 @@ Plug ('akinsho/toggleterm.nvim', {tag = '*'})
 -- indent
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+-- statusline
+Plug 'nvim-lualine/lualine.nvim'
+
 vim.call('plug#end')
