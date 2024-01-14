@@ -9,6 +9,7 @@ vim.g.coc_global_extensions = {
   'coc-json',
   'coc-yaml',
   'coc-spell-checker',
+  'coc-tailwindcss',
 }
 
 vim.cmd([[
