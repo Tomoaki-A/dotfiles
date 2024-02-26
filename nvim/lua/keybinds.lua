@@ -32,3 +32,5 @@ vim.keymap.set('n', ',', [[:BufferPrevious<cr> :lua require'nvim-tree.api'.tree.
 vim.keymap.set('n', '.', [[:BufferNext<cr>:lua require'nvim-tree.api'.tree.find_file({ open = true, focus = false, })<cr>]], {silent = false, noremap = true})
 
 vim.keymap.set('n', '<C-c>', ':BufferClose<cr>', {silent = true, noremap = true})
+vim.keymap.set('n', '<C-d>', ':BufferCloseAllButCurrent<cr>', {silent = true, noremap = true})
+vim.keymap.set('n', '<C-s>', ':BufferOrderByDirectory<cr>', {silent = false, noremap = true})
