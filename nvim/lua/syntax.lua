@@ -12,6 +12,7 @@ require'nvim-treesitter.configs'.setup ({
     "typoscript",
     "tsx",
     "vue",
+    "php",
   },
  highlight = {
   enable = true,

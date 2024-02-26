@@ -10,6 +10,9 @@ vim.g.coc_global_extensions = {
   'coc-yaml',
   'coc-spell-checker',
   'coc-tailwindcss',
+  "coc-phpls",
+  "coc-html",
+  "@yaegassy/coc-laravel",
 }
 
 vim.cmd([[
