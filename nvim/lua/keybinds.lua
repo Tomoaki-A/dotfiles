@@ -5,6 +5,8 @@ vim.keymap.set('v', '0', '$', { noremap = true, silent = true })
 vim.keymap.set('n', '1', '0', { noremap = true, silent = true })
 vim.keymap.set('v', '1', '0', { noremap = true, silent = true })
 
+vim.keymap.set('n', 'vv', 'viwy', { noremap = true, silent = true })
+
 -- nvim-tree
 vim.keymap.set("n", "<Space>at", ":NvimTreeToggle<cr>", {silent = true, noremap = true})
 vim.keymap.set("n", "<Space>af", ":NvimTreeFindFile<cr>", {silent = true, noremap = true})
