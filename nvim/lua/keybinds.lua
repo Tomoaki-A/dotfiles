@@ -1,7 +1,9 @@
 -- common
 vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
 vim.keymap.set('n', '0', '$', { noremap = true, silent = true })
+vim.keymap.set('v', '0', '$', { noremap = true, silent = true })
 vim.keymap.set('n', '1', '0', { noremap = true, silent = true })
+vim.keymap.set('v', '1', '0', { noremap = true, silent = true })
 
 -- nvim-tree
 vim.keymap.set("n", "<Space>at", ":NvimTreeToggle<cr>", {silent = true, noremap = true})
