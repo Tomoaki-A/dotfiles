@@ -13,6 +13,11 @@ os:
   # editCommandTemplate: 'nvim --listen /tmp/nvim-server.pipe --server /tmp/nvim-server.pipe --remote-tab "$(pwd)/{{filename}}"'
 
 customCommands:
+  - key: "y"
+    context: "files"
+    description: 'hoge'
+    subprocess: true
+    command: "echo -n {{.SelectedPath}} | pbcopy"
   - key: "C"
     context: "files"
     description: 'commit files with aicommits'
