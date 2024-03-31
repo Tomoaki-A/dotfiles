@@ -57,6 +57,7 @@ OpenAIのAPIキーを設定する。
 
 ```
 aicommits config set OPENAI_KEY=<your token>
+aicommits config set model=gpt-4
 ```
 
 ## GitHub Copilotの設定
