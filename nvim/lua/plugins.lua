@@ -39,4 +39,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 -- statusline
 Plug 'nvim-lualine/lualine.nvim'
 
+--
+Plug 'dense-analysis/ale'
+
 vim.call('plug#end')
