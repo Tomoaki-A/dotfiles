@@ -70,6 +70,11 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = false,
   },
+  git = {
+   enable = true,
+   ignore = false,
+   timeout = 500,
+  },
   on_attach = my_on_attach,
 })
 
