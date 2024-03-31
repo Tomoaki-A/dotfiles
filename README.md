@@ -7,6 +7,12 @@ rootディレクトリにクローンする。
 git clone https://github.com/Tomoaki-A/dotfiles.git
 ```
 
+## brewアプリのインストール
+
+```
+brew bundle --file ~/dotfiles/Brewfile
+```
+
 ## シンボリックリンクの設定
 
 ### neovim
