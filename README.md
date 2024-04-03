@@ -24,7 +24,7 @@ ln -f -n -s ~/dotfiles/nvim ~/.config
 ### tmux
 
 ```
-ln -s ~/dotfiles/tmux/tmux.config ~/.tmux.conf
+ln -f -n -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 ```
 
 ### lazygit
