@@ -6,3 +6,4 @@ alias gcm='git commit -m'
 alias gco='git checkout'
 alias grs='git reset --soft HEAD^'
 alias gso='git stash save --include-untracked' 
+alias gpurge="git for-each-ref --format '%(if)%(upstream:track)%(then)%(refname:short)%(end)' | xargs git branch -D"
