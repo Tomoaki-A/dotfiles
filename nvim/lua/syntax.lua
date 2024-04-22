@@ -13,6 +13,7 @@ require'nvim-treesitter.configs'.setup ({
     "tsx",
     "vue",
     "php",
+    "graphql",
   },
  highlight = {
   enable = true,
