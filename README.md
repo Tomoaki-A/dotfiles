@@ -40,6 +40,12 @@ ln -f -n -s ~/dotfiles/lazygit ~/.config
 ln -f -n -s ~/dotfiles/textlint/.textlintrc  ~/.textlintrc
 ```
 
+### alacritty
+
+```
+ln -f -n -s ~/dotfiles/alacritty ~/.config
+```
+
 ## vim-plugのインストール
 
 ```
