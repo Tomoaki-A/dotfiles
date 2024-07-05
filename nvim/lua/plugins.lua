@@ -42,4 +42,8 @@ Plug 'nvim-lualine/lualine.nvim'
 --
 Plug 'dense-analysis/ale'
 
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+
 vim.call('plug#end')

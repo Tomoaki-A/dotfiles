@@ -15,3 +15,10 @@ require('status-line')
 require('copilot')
 require('linter')
 require('ale')
+
+
+require("mason").setup()
+require("mason-lspconfig").setup {
+    ensure_installed = { "lua_ls", "biome", "tsserver" },
+}
+require'lspconfig'.biome.setup{}
