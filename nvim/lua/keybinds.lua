@@ -22,13 +22,16 @@ vim.keymap.set('n', '<Space>fg', require('telescope.builtin').live_grep, {})
 vim.keymap.set('n', '<Space>g', ':LazyGit<cr>', {silent = true, noremap = true})
 vim.keymap.set('n', '<Space>gg', ':Flog<cr>', {silent = true, noremap = true})
 
--- coc
---vim.keymap.set('n', 'gd', ':CocCommand fzf-preview.CocDefinition<cr>')
---vim.keymap.set('n', 'ge', ':CocCommand fzf-preview.CocCurrentDiagnostics<cr>')
---vim.keymap.set('n', 'gt', ':CocCommand fzf-preview.CocTypeDefinition<cr>')
---vim.keymap.set('n', 'gi', ':CocCommand fzf-preview.CocImplementations<cr>')
---vim.keymap.set('n', 'gr', ':CocCommand fzf-preview.CocReferences<cr>')
---vim.keymap.set('n', 'gh', ':call CocActionAsync("doHover")<cr>')
+-- 定義に移動
+vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions)
+-- 定義をホバー
+vim.keymap.set('n', 'gh', vim.lsp.buf.hover)
+-- 定義を参照
+vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references)
+-- エラーを表示
+vim.keymap.set('n', 'ge', vim.diagnostic.open_float)
+-- リネーム
+vim.keymap.set('n', 'gn', vim.lsp.buf.rename)
 
 -- tab
 -- @memo タブを移動するときに、nvim-treeのファイルを開く
