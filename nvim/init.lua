@@ -12,6 +12,4 @@ require('tab')
 require('terminal')
 require('indent')
 require('status-line')
-require('linter')
 require('ale')
-

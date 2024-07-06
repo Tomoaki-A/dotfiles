@@ -1,6 +1,4 @@
 local cmp = require('cmp')
-local map = cmp.mapping
-
 cmp.setup({
   sources = {
     { name = "nvim_lsp" },
