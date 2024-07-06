@@ -40,7 +40,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 
 --
---Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
