@@ -2,7 +2,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/site/autoload/plugged')
 
 -- coc.nvim
-Plug('neoclide/coc.nvim', {branch = 'release'})
+--Plug('neoclide/coc.nvim', {branch = 'release'})
 
 -- nvim-tree
 Plug 'nvim-tree/nvim-tree.lua'
@@ -40,7 +40,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 
 --
-Plug 'dense-analysis/ale'
+--Plug 'dense-analysis/ale'
 
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'

@@ -23,12 +23,12 @@ vim.keymap.set('n', '<Space>g', ':LazyGit<cr>', {silent = true, noremap = true})
 vim.keymap.set('n', '<Space>gg', ':Flog<cr>', {silent = true, noremap = true})
 
 -- coc
-vim.keymap.set('n', 'gd', ':CocCommand fzf-preview.CocDefinition<cr>')
-vim.keymap.set('n', 'ge', ':CocCommand fzf-preview.CocCurrentDiagnostics<cr>')
-vim.keymap.set('n', 'gt', ':CocCommand fzf-preview.CocTypeDefinition<cr>')
-vim.keymap.set('n', 'gi', ':CocCommand fzf-preview.CocImplementations<cr>')
-vim.keymap.set('n', 'gr', ':CocCommand fzf-preview.CocReferences<cr>')
-vim.keymap.set('n', 'gh', ':call CocActionAsync("doHover")<cr>')
+--vim.keymap.set('n', 'gd', ':CocCommand fzf-preview.CocDefinition<cr>')
+--vim.keymap.set('n', 'ge', ':CocCommand fzf-preview.CocCurrentDiagnostics<cr>')
+--vim.keymap.set('n', 'gt', ':CocCommand fzf-preview.CocTypeDefinition<cr>')
+--vim.keymap.set('n', 'gi', ':CocCommand fzf-preview.CocImplementations<cr>')
+--vim.keymap.set('n', 'gr', ':CocCommand fzf-preview.CocReferences<cr>')
+--vim.keymap.set('n', 'gh', ':call CocActionAsync("doHover")<cr>')
 
 -- tab
 -- @memo タブを移動するときに、nvim-treeのファイルを開く
