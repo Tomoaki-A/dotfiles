@@ -29,6 +29,7 @@ Plug 'romgrk/barbar.nvim'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'rbong/vim-flog'
+Plug 'lewis6991/gitsigns.nvim'
 
 -- terminal
 Plug ('akinsho/toggleterm.nvim', {tag = '*'})
