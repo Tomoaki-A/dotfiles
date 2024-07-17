@@ -2,7 +2,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/site/autoload/plugged')
 
 -- coc.nvim
-Plug('neoclide/coc.nvim', {branch = 'release'})
+--Plug('neoclide/coc.nvim', {branch = 'release'})
 
 -- nvim-tree
 Plug 'nvim-tree/nvim-tree.lua'
@@ -29,6 +29,7 @@ Plug 'romgrk/barbar.nvim'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'rbong/vim-flog'
+Plug 'lewis6991/gitsigns.nvim'
 
 -- terminal
 Plug ('akinsho/toggleterm.nvim', {tag = '*'})
@@ -42,4 +43,10 @@ Plug 'nvim-lualine/lualine.nvim'
 --
 Plug 'dense-analysis/ale'
 
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+
+Plug "hrsh7th/nvim-cmp"
+Plug "hrsh7th/cmp-nvim-lsp"
 vim.call('plug#end')
