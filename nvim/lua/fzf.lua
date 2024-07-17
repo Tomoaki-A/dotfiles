@@ -4,5 +4,8 @@ require('telescope').setup({
       "node_modules"
     },
     layout_strategy = "vertical",
+    path_display = {
+      "smart"
+    },
   }
 })
