@@ -12,7 +12,7 @@ cmp.setup({
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "tsserver","biome","eslint","tailwindcss" },
+    ensure_installed = { "tsserver","biome","eslint","tailwindcss","typos_lsp" },
 }
 require('mason-lspconfig').setup_handlers {
   function(server_name)
@@ -21,3 +21,12 @@ require('mason-lspconfig').setup_handlers {
     }
   end,
 }
+
+-- typo-lspをWarningレベルで起動
+require('lspconfig').typos_lsp.setup({
+    cmd_env = { RUST_LOG = "Warning" },
+    init_options = {
+        config = '~/code/typos-lsp/crates/typos-lsp/tests/typos.toml',
+        diagnosticSeverity = "Warning"
+    }
+})
