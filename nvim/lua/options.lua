@@ -45,5 +45,5 @@ vim.api.nvim_create_user_command('SearchWord', SearchWord, {})
 vim.api.nvim_set_keymap('n', 'gs', ':SearchWord<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_create_user_command('E', function()
-  vim.cmd('bufdo e!')
+  vim.cmd('LspRestart')
 end, {})
