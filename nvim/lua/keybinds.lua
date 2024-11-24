@@ -1,5 +1,5 @@
 -- common
-vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set('i', 'jj', '<Esc>:w<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '0', '$', { noremap = true, silent = true })
 vim.keymap.set('v', '0', '$', { noremap = true, silent = true })
 vim.keymap.set('n', '1', '0', { noremap = true, silent = true })
