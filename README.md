@@ -91,5 +91,10 @@ GitHubアカウントにログインした状態で下記のコマンドを実�
 :Copilot setup
 ```
 
+## BrewFileの更新
+```
+brew bundle dump --force
+```
+
 ## 参考URL
 - [Neovim設定覚書](https://zenn.dev/tomoaki_a/scraps/35262759c75b90)
