@@ -14,6 +14,9 @@ require'nvim-treesitter.configs'.setup ({
     "vue",
     "php",
     "graphql",
+    "prisma",
+    "sql",
+    "yaml",
   },
  highlight = {
   enable = true,
