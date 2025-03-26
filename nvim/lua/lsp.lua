@@ -30,3 +30,12 @@ require('lspconfig').typos_lsp.setup({
         diagnosticSeverity = "Warning"
     }
 })
+
+-- tsserverの設定
+require('lspconfig').tsserver.setup({
+    init_options = {
+      preferences = {
+        importModuleSpecifierPreference = 'non-relative', -- 絶対パス優先
+      }
+    }
+})
