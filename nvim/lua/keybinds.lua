@@ -41,3 +41,24 @@ vim.keymap.set('n', '.', [[:BufferNext<cr>:lua require'nvim-tree.api'.tree.find_
 vim.keymap.set('n', '<C-c>', ':BufferClose<cr>', {silent = true, noremap = true})
 vim.keymap.set('n', '<C-d>', ':BufferCloseAllButCurrent<cr>', {silent = true, noremap = true})
 vim.keymap.set('n', '<C-s>', ':BufferOrderByDirectory<cr>', {silent = true, noremap = true})
+
+-- aiderのきどう
+local Terminal = require("toggleterm.terminal").Terminal
+local aider = Terminal:new({
+  size = 20,
+  direction = "float",
+  hidden = true,
+  close_on_exit = true,
+  on_open = function(term)
+    vim.api.nvim_chan_send(term.job_id, "ai")
+    vim.api.nvim_chan_send(term.job_id, "\n")
+    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "<Esc>", "<cmd>close<CR>", {noremap = true, silent = true})
+  end,
+})
+
+function _open_aider()
+  aider:toggle()
+end
+
+vim.keymap.set('n', '<Space>ai', "<cmd>lua _open_aider()<CR>", { noremap = true, silent = true })
+
