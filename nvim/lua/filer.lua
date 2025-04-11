@@ -32,6 +32,11 @@ require("nvim-tree").setup({
   view = {
     width = 40,
   },
+  actions = {
+    open_file = {
+      quit_on_open = true,  -- ファイルを開いた後にツリーを閉じる
+    },
+  },
   renderer = {
     group_empty = true,
     highlight_git = true,
