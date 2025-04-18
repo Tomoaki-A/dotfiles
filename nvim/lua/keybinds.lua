@@ -27,7 +27,16 @@ vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions)
 -- 定義をホバー
 vim.keymap.set('n', 'gh', vim.lsp.buf.hover)
 -- 定義を参照
-vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references)
+vim.keymap.set('n', 'gr', function()
+  require('telescope.builtin').lsp_references({
+    layout_strategy = "vertical",
+    path_display = {
+      "truncate",
+    },
+    show_line = false,
+  })
+end)
+
 -- エラーを表示
 vim.keymap.set('n', 'ge', vim.diagnostic.open_float)
 -- リネーム
