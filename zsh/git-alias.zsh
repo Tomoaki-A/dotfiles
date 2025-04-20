@@ -9,4 +9,5 @@ alias gss='git stash save --include-untracked'
 alias gsl='git stash list'
 alias gsa='git stash apply'
 alias gsp='git stash pop'
+alias gsc='git stash clear'
 alias gpurge="git for-each-ref --format '%(if)%(upstream:track)%(then)%(refname:short)%(end)' | xargs git branch -D"
