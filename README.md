@@ -69,7 +69,7 @@ source ~/dotfiles/zsh/base.zsh
 # git
 source ~/dotfiles/zsh/git-alias.zsh
 
-# pacage manager
+# package manager
 source ~/dotfiles/zsh/package-manager.zsh
 
 # util
@@ -95,6 +95,13 @@ GitHubアカウントにログインした状態で下記のコマンドを実�
 ```
 brew bundle dump --force
 ```
+## Key入力感度調整
+```
+defaults write -g KeyRepeat -int 1
+defaults write -g InitialKeyRepeat -int 10
+```
+
+コマンド入力後システム再起動が必要。
 
 ## 参考URL
 - [Neovim設定覚書](https://zenn.dev/tomoaki_a/scraps/35262759c75b90)
