@@ -5,4 +5,4 @@ alias cg="node ~/template_file_creator/dist/index.js"
 
 alias t="tmux a"
 
-alias cd='claude'
+alias c='claude'
