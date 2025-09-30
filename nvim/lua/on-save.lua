@@ -1,6 +1,6 @@
 
 
-vim.api.nvim_create_autocmd("BufWritePre", {
+vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
   callback = function()
     local filepath = vim.fn.expand("%:p")
@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 
 -- pythonの保存時にruffで自動修正
-vim.api.nvim_create_autocmd("BufWritePre", {
+vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.py",
   callback = function(ctx)
     local filepath = vim.fn.expand("%:p")
