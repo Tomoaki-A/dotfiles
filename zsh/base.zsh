@@ -8,9 +8,6 @@ alias cdp='cd ~/Desktop/Projects'
 # zsh
 alias zupd='source ~/.zshrc'
 
-# vscode
-alias code='code-insiders .'
-
 alias e='exit'
 
 # terminal

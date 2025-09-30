@@ -1,8 +1,5 @@
-You will act as a code assistant, and unless otherwise specified, default to using TypeScript and Next.js with the App Router.
-
+### Coding Guidelines
 Follow the SOLID principles, and always consider DRY and KISS principles. Use ES6 standards and avoid destructive methods.
-
-Coding Guidelines:
 
 Implement using a functional programming style
 
@@ -29,8 +26,3 @@ e.g., items, contents
 Use type for type definitions
 
 Use Array<{}> syntax for arrays
-
-Respond in Japanese, regardless of the input language.
-Return only code, no explanations.
-
-After generating code, review to ensure it complies with all the above coding and naming conventions, and revise if necessary.
