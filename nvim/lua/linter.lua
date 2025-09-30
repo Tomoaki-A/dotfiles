@@ -1,8 +1,0 @@
---vim.g.ale_linters = {
--- markdown = {'textlint'}
---}
---
---vim.g.ale_fixers = {
--- markdown = {'textlint'}
---}
---
