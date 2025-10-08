@@ -12,7 +12,7 @@ cmp.setup({
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "tsserver","biome","eslint","tailwindcss","typos_lsp","pyright", "ruff" },
+    ensure_installed = { "ts_ls","biome","eslint","tailwindcss","typos_lsp","pyright", "ruff" },
 }
 require('mason-lspconfig').setup_handlers {
   function(server_name)
@@ -28,5 +28,14 @@ require('lspconfig').typos_lsp.setup({
     init_options = {
         config = '~/code/typos-lsp/crates/typos-lsp/tests/typos.toml',
         diagnosticSeverity = "Warning"
+    }
+})
+
+-- tsserverの設定
+require('lspconfig').ts_ls.setup({
+    init_options = {
+      preferences = {
+        importModuleSpecifierPreference = 'non-relative', -- 絶対パス優先
+      }
     }
 })
