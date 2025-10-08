@@ -27,6 +27,8 @@ end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "xx", '"_dd', { noremap = true, silent = true })
 
+vim.keymap.set("n", "rr", [[:%s/\<<C-r><C-w>\>//gc<Left><Left><Left>]], { noremap = true, silent = false })
+
 -- 単語のヤンク
 vim.keymap.set('n', 'vv', 'viwy', { noremap = true, silent = true })
 
