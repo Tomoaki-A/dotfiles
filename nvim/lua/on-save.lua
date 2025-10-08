@@ -1,10 +1,18 @@
+local function get_ts_ls_root_dir()
+  for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+    if client.name == "ts_ls" then
+      return client.config.root_dir
+    end
+  end
+  return nil
+end
+
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
   callback = function()
     local filepath = vim.fn.expand("%:p")
-
-    -- プロジェクトルートから上に遡って node_modules を探す
-    local node_modules = vim.fn.finddir("node_modules", ".;")
+    local root_dir = get_ts_ls_root_dir()
+    local node_modules = root_dir and vim.fn.finddir("node_modules", root_dir .. ";") or ""
     if node_modules == "" then
       return  -- node_modules がなければ何もしない
     end
