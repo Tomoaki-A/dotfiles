@@ -1,32 +1,48 @@
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.js","*.jsx","*.ts","*.tsx","*.json","*.jsonc" },
-  callback = function(args)
-    local bufnr = args.buf
+local function get_ts_ls_root_dir()
+  for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+    if client.name == "ts_ls" then
+      return client.config.root_dir
+    end
+  end
+  return nil
+end
 
-    -- biome が attach しているかチェック
-    local has_biome = false
-    for _, c in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
-      if c.name == "biome" and c:supports_method("textDocument/formatting") then
-        has_biome = true
-        break
-      end
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
+  callback = function()
+    local filepath = vim.fn.expand("%:p")
+    local root_dir = get_ts_ls_root_dir()
+    local node_modules = root_dir and vim.fn.finddir("node_modules", root_dir .. ";") or ""
+    if node_modules == "" then
+      return  -- node_modules がなければ何もしない
     end
 
-    if has_biome then
-      -- biome LSP でフォーマット
-      vim.lsp.buf.format({
-        bufnr = bufnr,
-        filter = function(c) return c.name == "biome" end,
-        timeout_ms = 2000,
-      })
-    else
-      -- biome が無いときは prettier CLI を使用
-      local prettier_bin = require("mason-core.path").bin_prefix("prettier")
-      if vim.fn.executable(prettier_bin) == 1 then
-        vim.system({ prettier_bin, "--write", args.file }):wait()
-      else
-        vim.notify("Neither biome nor prettier is available for formatting", vim.log.levels.WARN)
-      end
+    local biome_path = node_modules .. "/.bin/biome"
+    local eslint_path = node_modules .. "/.bin/eslint"
+    local prettier_path = node_modules .. "/.bin/prettier"
+
+    --  Biome があれば最優先で実行
+    if vim.fn.filereadable(biome_path) == 1 then
+      vim.system({ biome_path, "format", "--write", filepath }):wait()
+      vim.cmd("edit!")
+      return
+    end
+
+    -- SLint → Prettier の順で実行（両方ローカルにある場合のみ）
+    local ran = false
+
+    if vim.fn.filereadable(eslint_path) == 1 then
+      vim.system({ eslint_path, "--fix", filepath }):wait()
+      ran = true
+    end
+
+    if vim.fn.filereadable(prettier_path) == 1 then
+      vim.system({ prettier_path, "--write", filepath }):wait()
+      ran = true
+    end
+
+    if ran then
+      vim.cmd("edit!")
     end
   end,
 })
