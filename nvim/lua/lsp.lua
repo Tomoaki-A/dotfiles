@@ -12,7 +12,7 @@ cmp.setup({
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "tsserver","biome","eslint","tailwindcss","typos_lsp" },
+    ensure_installed = { "tsserver","biome","eslint","tailwindcss","typos_lsp","pyright", "ruff" },
 }
 require('mason-lspconfig').setup_handlers {
   function(server_name)
