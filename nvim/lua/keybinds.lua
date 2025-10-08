@@ -1,10 +1,33 @@
 -- common
 vim.keymap.set('i', 'jj', '<Esc>:w<CR>', { noremap = true, silent = true })
+
 vim.keymap.set('n', '0', '$', { noremap = true, silent = true })
 vim.keymap.set('v', '0', '$', { noremap = true, silent = true })
 vim.keymap.set('n', '1', '0', { noremap = true, silent = true })
 vim.keymap.set('v', '1', '0', { noremap = true, silent = true })
 
+-- 移動
+vim.keymap.set('n', 'w', 'ge', { noremap = true, silent = true })
+vim.keymap.set("n", "]e", function()
+  vim.diagnostic.goto_next({
+    severity = vim.diagnostic.severity.ERROR,
+    skip_current = true
+  })
+  vim.cmd("normal! e")
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "]w", function()
+  vim.cmd("normal! b")
+  vim.diagnostic.goto_prev({
+    severity = vim.diagnostic.severity.ERROR,
+    skip_current = true
+  })
+  vim.cmd("normal! e")
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "xx", '"_dd', { noremap = true, silent = true })
+
+-- 単語のヤンク
 vim.keymap.set('n', 'vv', 'viwy', { noremap = true, silent = true })
 
 -- nvim-tree
