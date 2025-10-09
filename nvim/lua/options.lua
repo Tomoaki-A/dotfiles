@@ -32,13 +32,13 @@ vim.opt.laststatus = 3
 
 -- gsで単語のハイライトをtoggleする
 function SearchWord()
-    if vim.v.hlsearch == 1 then
-      vim.cmd('nohlsearch')
-      return
-    end
-    local word = vim.fn.expand('<cword>')
-    vim.fn.setreg('/', '\\<' .. word .. '\\>')
-    vim.opt.hlsearch = true
+  if vim.v.hlsearch == 1 then
+    vim.cmd('nohlsearch')
+    return
+  end
+  local word = vim.fn.expand('<cword>')
+  vim.fn.setreg('/', '\\<' .. word .. '\\>')
+  vim.opt.hlsearch = true
 end
 
 vim.api.nvim_create_user_command('SearchWord', SearchWord, {})

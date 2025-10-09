@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     local root_dir = get_ts_ls_root_dir()
     local node_modules = root_dir and vim.fn.finddir("node_modules", root_dir .. ";") or ""
     if node_modules == "" then
-      return  -- node_modules がなければ何もしない
+      return -- node_modules がなければ何もしない
     end
 
     local biome_path = node_modules .. "/.bin/biome"
@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
     --  Biome があれば最優先で実行
     if vim.fn.filereadable(biome_path) == 1 then
-      vim.lsp.buf.format({name = "biome",async = false,})
+      vim.lsp.buf.format({ name = "biome", async = false, })
       return
     end
 
@@ -50,5 +50,12 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     vim.system({ "ruff", "check", filepath, "--fix" }):wait()
     vim.system({ "ruff", "format", filepath }):wait()
     vim.cmd("edit!")
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.lua",
+  callback = function()
+    vim.lsp.buf.format({ async = false })
   end,
 })
