@@ -1,11 +1,7 @@
--- TypeScriptのLSP設定を基準にルートディレクトリを決定
+-- ルートディレクトリを決定
 local function get_ts_ls_root_dir()
-  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-    if client.name == "vtsls" then
-      return client.config.root_dir
-    end
-  end
-  return nil
+  local root = require("lspconfig.util").root_pattern(".git")
+  return root(vim.fn.getcwd())
 end
 
 vim.api.nvim_create_autocmd("BufWritePre", {
