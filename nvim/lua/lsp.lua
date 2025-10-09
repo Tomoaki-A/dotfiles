@@ -10,84 +10,104 @@ cmp.setup({
   }),
 })
 
-local path = require("mason-core.path")
 require("mason").setup()
 
-require("mason-lspconfig").setup {
-    ensure_installed = { "ts_ls","biome","eslint","tailwindcss","typos_lsp","pyright", "ruff" },
+local servers = {
+ "vtsls",
+ "biome",
+ "tailwindcss",
+ "eslint",
+ "typos_lsp",
+ "pyright",
+ "ruff",
 }
 
--- 1) Mason の bin を PATH に通す（typescript-language-server を確実に見せる）
-vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
-
--- 2) ルート検出（取れなくても CWD で起動する保険付き）
-local function ts_root(fname)
-  return require("lspconfig.util").root_pattern(
-    "pnpm-workspace.yaml","turbo.json","yarn.lock",
-    "package.json","tsconfig.json",".git"
-  )(fname) or vim.loop.cwd()
-end
-
--- 3) ts_ls を通常セットアップ
-require("lspconfig").ts_ls.setup({
-  cmd = { "typescript-language-server", "--stdio" }, -- Mason 経由を想定
-  root_dir = ts_root,
-  single_file_support = true,
-  capabilities = require("cmp_nvim_lsp").default_capabilities(),
-  init_options = { hostInfo = "neovim" },
+require("mason-lspconfig").setup({
+  ensure_installed = servers,
 })
 
--- 4) FileType に頼らず、拡張子ベースで“必ず”付ける保険（読み込み順問題を回避）
-local grp = vim.api.nvim_create_augroup("EnsureTsLsAttached", { clear = true })
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-  group = grp,
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
-  callback = function(args)
-    -- 既に ts_ls が付いていれば何もしない
-    for _, c in ipairs(vim.lsp.get_clients({ bufnr = args.buf })) do
-      if c.name == "ts_ls" then return end
-    end
-    -- lspconfig のマネージャ経由でこのバッファを追加。無ければ最後の手段として LspStart
-    local srv = require("lspconfig").ts_ls
-    if srv and srv.manager and srv.manager.try_add then
-      srv.manager.try_add(args.buf)
-    else
-      vim.cmd("LspStart " .. "ts_ls")
+local lspconfig = require("lspconfig")
+
+local frontend_filetypes = {
+  "html",
+  "css",
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+  "vue",
+  "svelte",
+}
+
+-- TypeScript/JavaScript LSPの設定
+lspconfig.vtsls.setup({
+  capabilities = capabilities,
+  cmd = { vim.fn.stdpath("data") .. "/mason/bin/vtsls", "--stdio" },
+  filetypes = frontend_filetypes,
+  root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
+  single_file_support = true,
+  settings = {
+  vtsls = { tsserver = { maxTsServerMemory = 4096 } },
+  typescript = { preferences = { importModuleSpecifier = "non-relative" } },
+  },
+})
+
+-- Biome LSPの設定
+lspconfig.biome.setup({
+  capabilities = capabilities,
+  cmd = { vim.fn.stdpath("data") .. "/mason/bin/biome", "lsp" },
+  filetypes = frontend_filetypes,
+  root_dir = lspconfig.util.root_pattern("biome.json", ".biomerc", ".git"),
+  single_file_support = true,
+})
+
+-- Tailwind CSS LSPの設定
+lspconfig.tailwindcss.setup({
+  capabilities = capabilities,
+  cmd = { vim.fn.stdpath("data") .. "/mason/bin/tailwindcss-language-server", "--stdio" },
+  filetypes = frontend_filetypes,
+  root_dir = lspconfig.util.root_pattern("tailwind.config.js", "tailwind.config.cjs", "tailwind.config.ts", "postcss.config.js", "postcss.config.cjs", "postcss.config.ts", "package.json", ".git"),
+  single_file_support = true,
+})
+
+-- ESLint LSPの設定
+lspconfig.eslint.setup({
+  capabilities = capabilities,
+  filetypes = frontend_filetypes,
+  root_dir = lspconfig.util.root_pattern(".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json", ".eslintrc.yaml", ".eslintrc.yml", "package.json", ".git"),
+  single_file_support = true,
+
+  on_init = function(client)
+    -- LSP 側から送られる「Unable to find ESLint library.」メッセージを潰す
+    local notify = vim.notify
+    vim.notify = function(msg, level, opts)
+      if type(msg) == "string" and msg:match("Unable to find ESLint library") then
+        return
+      end
+      notify(msg, level, opts)
     end
   end,
 })
 
--- biomeの設定
-require('lspconfig').biome.setup({
-  cmd = { path.bin_prefix("biome"), "lsp-proxy" },
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
-})
--- eslintの設定
-require('lspconfig').eslint.setup({
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+-- Typos LSPの設定
+lspconfig.typos_lsp.setup({
+  capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern(".git"),
+  single_file_support = true,
 })
 
--- tailwindcssの設定
-require('lspconfig').tailwindcss.setup({
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+-- Python LSPの設定
+lspconfig.pyright.setup({
+  capabilities = capabilities,
+  filetypes = { "python" },
+  root_dir = lspconfig.util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "Pipfile.lock", ".git"),
+  single_file_support = true,
 })
 
--- pyrightの設定
-require('lspconfig').pyright.setup({
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
-})
-
--- ruffの設定
-require('lspconfig').ruff_lsp.setup({
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
-})
-
--- typo-lspをWarningレベルで起動
-require('lspconfig').typos_lsp.setup({
-    cmd_env = { RUST_LOG = "Warning" },
-    init_options = {
-        config = '~/code/typos-lsp/crates/typos-lsp/tests/typos.toml',
-        diagnosticSeverity = "Warning"
-    },
-    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+-- Ruff LSPの設定
+lspconfig.ruff_lsp.setup({
+  capabilities = capabilities,
+  filetypes = { "python" },
+  root_dir = lspconfig.util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "Pipfile.lock", ".git"),
+  single_file_support = true,
 })

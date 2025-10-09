@@ -43,8 +43,8 @@ Plug 'nvim-lualine/lualine.nvim'
 --
 Plug 'dense-analysis/ale'
 
-Plug ('williamboman/mason.nvim', { ['tag'] = 'v1.11.0' })
-Plug ('williamboman/mason-lspconfig.nvim', { ['tag'] = 'v1.32.0' })
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 
 Plug "hrsh7th/nvim-cmp"

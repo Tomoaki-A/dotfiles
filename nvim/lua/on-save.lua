@@ -1,13 +1,14 @@
+-- TypeScriptのLSP設定を基準にルートディレクトリを決定
 local function get_ts_ls_root_dir()
-  for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-    if client.name == "ts_ls" then
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    if client.name == "vtsls" then
       return client.config.root_dir
     end
   end
   return nil
 end
 
-vim.api.nvim_create_autocmd("BufWritePost", {
+vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
   callback = function()
     local filepath = vim.fn.expand("%:p")
@@ -23,8 +24,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
     --  Biome があれば最優先で実行
     if vim.fn.filereadable(biome_path) == 1 then
-      vim.system({ biome_path, "format", "--write", filepath }):wait()
-      vim.cmd("edit!")
+      vim.lsp.buf.format({name = "biome",async = false,})
       return
     end
 
