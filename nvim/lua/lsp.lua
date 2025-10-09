@@ -22,6 +22,7 @@ local servers = {
   "ruff",
   "stylua",
   "lua_ls",
+  "graphql",
 }
 
 local unsupported_servers = { "cspell-lsp" }
