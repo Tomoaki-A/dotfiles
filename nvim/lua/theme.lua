@@ -4,18 +4,18 @@ end
 
 vim.cmd('colorscheme github_dark_colorblind')
 
-vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg="#FFBA18" })
-vim.api.nvim_set_hl(0, "WarningMsg", { fg="#FFBA18" })
-vim.api.nvim_set_hl(0, "Warning", { fg="#FFBA18" })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg="#FFBA18" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { underline=true, fg="#FFBA18" })
+vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#FFBA18" })
+vim.api.nvim_set_hl(0, "WarningMsg", { fg = "#FFBA18" })
+vim.api.nvim_set_hl(0, "Warning", { fg = "#FFBA18" })
+vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#FFBA18" })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { underline = true, fg = "#FFBA18" })
 vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
 
-vim.api.nvim_set_hl(0, "DiagnosticError", { fg="#DF3478" })
-vim.api.nvim_set_hl(0, "ErrorMsg", { fg="#DF3478" })
-vim.api.nvim_set_hl(0, "Error", { fg="#DF3478" })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg="#DF3478" })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { underline=true, fg="#DF3478" })
+vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#DF3478" })
+vim.api.nvim_set_hl(0, "ErrorMsg", { fg = "#DF3478" })
+vim.api.nvim_set_hl(0, "Error", { fg = "#DF3478" })
+vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#DF3478" })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { underline = true, fg = "#DF3478" })
 vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
 
 --vim.cmd('hi clear')

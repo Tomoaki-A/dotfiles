@@ -21,7 +21,7 @@ local function my_on_attach(bufnr)
 
   api.config.mappings.default_on_attach(bufnr)
   -- fに割り当てられているkeymapを削除
-  vim.keymap.del("n", "f", {buffer = bufnr})
+  vim.keymap.del("n", "f", { buffer = bufnr })
 end
 
 -- nvim-treeの設定
@@ -35,7 +35,7 @@ require("nvim-tree").setup({
   },
   actions = {
     open_file = {
-      quit_on_open = true,  -- ファイルを開いた後にツリーを閉じる
+      quit_on_open = true, -- ファイルを開いた後にツリーを閉じる
     },
   },
   renderer = {
@@ -58,57 +58,57 @@ require("nvim-tree").setup({
     },
   },
   diagnostics = {
-        enable = true,
-        show_on_dirs = false,
-        show_on_open_dirs = true,
-        debounce_delay = 50,
-        severity = {
-          min = vim.diagnostic.severity.HINT,
-          max = vim.diagnostic.severity.ERROR,
-        },
-        icons = {
-          -- hint = "",
-          -- info = "",
-          warning = "",
-          error = "",
-        },
-      },
+    enable = true,
+    show_on_dirs = false,
+    show_on_open_dirs = true,
+    debounce_delay = 50,
+    severity = {
+      min = vim.diagnostic.severity.HINT,
+      max = vim.diagnostic.severity.ERROR,
+    },
+    icons = {
+      -- hint = "",
+      -- info = "",
+      warning = "",
+      error = "",
+    },
+  },
   filters = {
     dotfiles = false,
   },
   git = {
-   enable = true,
-   ignore = false,
-   timeout = 500,
+    enable = true,
+    ignore = false,
+    timeout = 500,
   },
   on_attach = my_on_attach,
 })
 
 -- nvim-web-deviconsの設定
 require('nvim-web-devicons').setup {
- override = {
-  ts = {
-    icon = "󰛦",
-    color = "#519aba",
-    cterm_color = "48",
-    name = "TypeScript"
-  }
- };
- color_icons = true;
- default = true;
- strict = true;
- override_by_filename = {
-  [".gitignore"] = {
-    icon = "",
-    color = "#f1502f",
-    name = "Gitignore"
-  }
- };
- override_by_extension = {
-  ["log"] = {
-    icon = "",
-    color = "#81e043",
-    name = "Log"
-  }
- };
+  override = {
+    ts = {
+      icon = "󰛦",
+      color = "#519aba",
+      cterm_color = "48",
+      name = "TypeScript"
+    }
+  },
+  color_icons = true,
+  default = true,
+  strict = true,
+  override_by_filename = {
+    [".gitignore"] = {
+      icon = "",
+      color = "#f1502f",
+      name = "Gitignore"
+    }
+  },
+  override_by_extension = {
+    ["log"] = {
+      icon = "",
+      color = "#81e043",
+      name = "Log"
+    }
+  },
 }

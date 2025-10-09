@@ -1,11 +1,11 @@
 local highlight = {
-    "CursorColumn",
-    "Whitespace",
+	"CursorColumn",
+	"Whitespace",
 }
 
 require("ibl").setup({
-    whitespace = {
-        highlight = highlight,
-        remove_blankline_trail = false,
-    },
+	whitespace = {
+		highlight = highlight,
+		remove_blankline_trail = false,
+	},
 })

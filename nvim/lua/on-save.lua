@@ -1,20 +1,17 @@
+-- ルートディレクトリを決定
 local function get_ts_ls_root_dir()
-  for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-    if client.name == "ts_ls" then
-      return client.config.root_dir
-    end
-  end
-  return nil
+  local root = require("lspconfig.util").root_pattern(".git")
+  return root(vim.fn.getcwd())
 end
 
-vim.api.nvim_create_autocmd("BufWritePost", {
+vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
   callback = function()
     local filepath = vim.fn.expand("%:p")
     local root_dir = get_ts_ls_root_dir()
     local node_modules = root_dir and vim.fn.finddir("node_modules", root_dir .. ";") or ""
     if node_modules == "" then
-      return  -- node_modules がなければ何もしない
+      return -- node_modules がなければ何もしない
     end
 
     local biome_path = node_modules .. "/.bin/biome"
@@ -23,8 +20,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
     --  Biome があれば最優先で実行
     if vim.fn.filereadable(biome_path) == 1 then
-      vim.system({ biome_path, "format", "--write", filepath }):wait()
-      vim.cmd("edit!")
+      vim.lsp.buf.format({ name = "biome", async = false, })
       return
     end
 
@@ -54,5 +50,12 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     vim.system({ "ruff", "check", filepath, "--fix" }):wait()
     vim.system({ "ruff", "format", filepath }):wait()
     vim.cmd("edit!")
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.lua",
+  callback = function()
+    vim.lsp.buf.format({ async = false })
   end,
 })
