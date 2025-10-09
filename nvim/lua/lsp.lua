@@ -22,10 +22,18 @@ local servers = {
  "ruff",
 }
 
+local unsupported_servers = { "cspell-lsp" }
+
 require("mason-lspconfig").setup({
   ensure_installed = servers,
 })
 
+local mason_registry = require("mason-registry")
+for _, name in ipairs(unsupported_servers) do
+  if not mason_registry.is_installed(name) then
+    mason_registry.get_package(name):install()
+  end
+end
 local lspconfig = require("lspconfig")
 
 local frontend_filetypes = {
@@ -89,11 +97,10 @@ lspconfig.eslint.setup({
   end,
 })
 
--- Typos LSPの設定
-lspconfig.typos_lsp.setup({
+-- Typo LSPの設定
+lspconfig.cspell.setup({
   capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern(".git"),
-  single_file_support = true,
+  cmd = { "cspell-lsp" },
 })
 
 -- Python LSPの設定
