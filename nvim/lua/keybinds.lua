@@ -29,11 +29,9 @@ vim.keymap.set("n", "rr", [[:%s/\<<C-r><C-w>\>//gc<Left><Left><Left>]], { norema
 vim.keymap.set('n', 'vv', 'viwy', { noremap = true, silent = true })
 
 -- nvim-tree
-vim.keymap.set("n", "<Space>at", ":NvimTreeToggle<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<Space>af", ":NvimTreeFindFile<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<Space>ap", [[:NvimTreeFindFile<cr>:lua require'nvim-tree.api'.fs.copy.relative_path()<cr>]],
+vim.keymap.set("n", "<Space><Space>", ":NvimTreeFindFile<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<Space><Space>p", [[:NvimTreeFindFile<cr>:lua require'nvim-tree.api'.fs.copy.relative_path()<cr>]],
   { silent = true, noremap = true })
-vim.keymap.set('n', '<Space>ac', ":NvimTreeCollapse<cr>", { noremap = true, silent = true })
 
 -- telescope
 vim.keymap.set('n', '<Space>ff', require('telescope.builtin').find_files, {})
