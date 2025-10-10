@@ -17,7 +17,6 @@ local servers = {
   "biome",
   "tailwindcss",
   "eslint",
-  "typos_lsp",
   "pyright",
   "ruff",
   "stylua",
@@ -120,6 +119,7 @@ lspconfig.eslint.setup({
 -- Typo LSPの設定
 lspconfig.cspell.setup({
   capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern(".git"),
   cmd = { "cspell-lsp" },
 })
 
