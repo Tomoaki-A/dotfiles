@@ -4,6 +4,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 alias cdd='cd ~/Desktop'
 alias cddot='cd ~/dotfiles'
 alias cdp='cd ~/Documents/Projects'
+alias cda='cd ~/Documents/Projects/akatsuki'
 
 # zsh
 alias zupd='source ~/.zshrc'
