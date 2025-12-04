@@ -15,10 +15,17 @@ brew bundle --file ~/dotfiles/Brewfile
 
 ## シンボリックリンクの設定
 
+### config
+なければ
+```
+mkdir -p ~/.config
+```
+
 ### neovim
 
 ```
-ln -f -n -s ~/dotfiles/nvim ~/.config
+rm -rf ~/.config/nvim
+ln -sfn ~/dotfiles/nvim ~/.config/nvim
 ```
 
 ### tmux
@@ -43,7 +50,7 @@ ln -f -n -s ~/dotfiles/textlint/.textlintrc  ~/.textlintrc
 ### alacritty
 
 ```
-ln -f -n -s ~/dotfiles/alacritty ~/.config
+ln -sfn ~/dotfiles/alacritty ~/.config/alacritty
 ```
 
 ## vim-plugのインストール
