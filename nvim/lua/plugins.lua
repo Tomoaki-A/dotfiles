@@ -49,4 +49,8 @@ Plug("neovim/nvim-lspconfig")
 
 Plug("hrsh7th/nvim-cmp")
 Plug("hrsh7th/cmp-nvim-lsp")
+
+-- markdown preview
+Plug("OXY2DEV/markview.nvim")
+
 vim.call("plug#end")
