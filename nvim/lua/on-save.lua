@@ -5,7 +5,7 @@ local function get_ts_ls_root_dir()
 end
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },
+  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.css" },
   callback = function()
     local filepath = vim.fn.expand("%:p")
     local root_dir = get_ts_ls_root_dir()
