@@ -20,6 +20,7 @@
 ## Next.js
 - App Routerを前提とする
 - UIとドメインロジックを分離する
+- page.tsxではexport defaultを使用し、それ以外ではexport constを使用する
 
 # React
 - 公開するメインコンポーネントは`index.tsx` に書き `export` する
