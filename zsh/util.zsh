@@ -71,6 +71,11 @@ llmdoc() {
 - App Routerを前提とする
 - UIとドメインロジックを分離する
 
+# React
+- 公開するメインコンポーネントは\`index.tsx\` に書き \`export\` する
+- メインからのみ使用するローカルコンポーネントは \`index.tsx\` 内に \`export\` なしで書く
+- \`index.tsx\` が肥大化しそうな場合は同階層に \`ComponentName.tsx\` で分割する
+
 ## 一般原則
 - SOLID / DRY / KISSを指針として扱う
 - ドメイン駆動設計(DDD) を指針として扱う
@@ -88,6 +93,10 @@ llmdoc() {
 
   _mkfile_if_absent "$rules_dir/structure.md" \
 "# 構成・構造規約
+
+### 概念の表現
+- 概念はディレクトリで表現する
+- 型/定数/関数は共通のファイル名を使用する（types.ts / consts.ts / scripts.ts）
 
 ## ディレクトリ構成
 ### UIコンポーネント
