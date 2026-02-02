@@ -21,139 +21,50 @@ llmdoc() {
   # 生成先（デフォルト: カレント配下の docs/agent）
   local root="${1:-docs/agent}"
   local rules_dir="$root/rules"
+  local repo_root
+  repo_root="$(git -C "${PWD:A}" rev-parse --show-toplevel 2>/dev/null)"
+  local template_root=""
+  if [[ -d "${HOME}/dotfiles/agent" ]]; then
+    template_root="${HOME}/dotfiles/agent"
+  elif [[ -n "$repo_root" && -d "$repo_root/agent" ]]; then
+    template_root="$repo_root/agent"
+  else
+    echo "missing template root: ${HOME}/dotfiles/agent or \$repo_root/agent"
+    return 1
+  fi
 
-  mkdir -p "$rules_dir"
+  /bin/mkdir -p "$rules_dir"
 
-  _mkfile_if_absent() {
+  _mkfile_from_template() {
     local path="$1"
-    local content="$2"
+    local template_rel="$2"
+    local src="$template_root/$template_rel"
+
+    if [[ ! -e "$src" ]]; then
+      echo "missing template: $src"
+      return 1
+    fi
 
     if [[ -e "$path" ]]; then
       echo "skip: $path (already exists)"
       return 0
     fi
 
-    mkdir -p "$(dirname "$path")"
-    printf "%s" "$content" > "$path"
+    /bin/mkdir -p "$(/usr/bin/dirname "$path")"
+    /bin/cp "$src" "$path"
     echo "create: $path"
   }
 
 # --- Agent Docs ---
-  _mkfile_if_absent "$root/BASE.md" \
-"# Agent基本方針（BASE）
-
-## 基本思想
-- 正本はdocs/agent/INDEX.md
-- ドキュメントは日本語を優先する
-"
-
-  _mkfile_if_absent "$rules_dir/coding.md" \
-"# コーディング規約
-
-## TypeScript
-### 関数
-- 関数型プログラミングスタイルで実装する
-- 破壊的なメソッドは使用しない
-- 関数は小さく、副作用を持たせない
-- アロー関数のみを使用する
-- pushメソッドは使用しない
-- forループは使用しない
-- forEachは使用しない
-- map/flatMap/reduceを優先的に使用する
-- 関数の引数はObjectでまとめることを優先する
-
-### 型定義
-- 型定義は \`type\` を使用する
-- 配列型は \`Array<T>\` 形式を使う
-- 配列型の場合初期値は空配列 \`[]\` を使いOptionalにしない
-
-## Next.js
-- App Routerを前提とする
-- UIとドメインロジックを分離する
-
-# React
-- 公開するメインコンポーネントは\`index.tsx\` に書き \`export\` する
-- メインからのみ使用するローカルコンポーネントは \`index.tsx\` 内に \`export\` なしで書く
-- \`index.tsx\` が肥大化しそうな場合は同階層に \`ComponentName.tsx\` で分割する
-
-## 一般原則
-- SOLID / DRY / KISSを指針として扱う
-- ドメイン駆動設計(DDD) を指針として扱う
-- クリーンアーキテクチャを指針として扱う
-"
-
-  _mkfile_if_absent "$rules_dir/naming.md" \
-"# 命名規約
-
-## コード命名
-- 意味のある変数名・引数名を使う
-- 配列型は \`~List\` サフィックスを付ける（例: UserList）
-- オブジェクトの集合は複数形を使う
-"
-
-  _mkfile_if_absent "$rules_dir/structure.md" \
-"# 構成・構造規約
-
-### 概念の表現
-- 概念はディレクトリで表現する
-- 型/定数/関数は共通のファイル名を使用する（types.ts / consts.ts / scripts.ts）
-
-## ディレクトリ構成
-### UIコンポーネント
-- ui/
-  - Reactコンポーネントを配置
-- ui/entity/
-  - domainに依存するコンポーネントを配置
-- ui/parts/
-  - 再利用可能な小さなコンポーネントを配置
-  - domainに依存しない
-
-### ドメインロジック
-- domain/
-  - クリーンアーキテクチャのentity層に対応
-  - 配下に各概念ごとのディレクトリを作成する
-  - ビジネスロジックを配置
-  - ドメインモデル（型定義）を配置
-
-### データ
-- data/
-  - クリーンアーキテクチャのdata層に対応
-  - 外部APIやデータベースとのやり取りを担当
-  - 配下に各概念ごとのディレクトリを作成する
-"
-
-  _mkfile_if_absent "$root/INDEX.md" \
-"# AgentドキュメントINDEX
-
-## 読む順番
-1. BASE.md
-2. rules/*
-
-## ドキュメント構成
-- 基本方針: ./BASE.md
-- コーディング規約: ./rules/coding.md
-- 命名規約: ./rules/naming.md
-- 構成規約: ./rules/structure.md
-
-## 追加ルール
-- 新しいドキュメントを追加する場合は、必ずこのINDEXを更新する
-- INDEXに記載されていないドキュメントは参照禁止
-"
+  _mkfile_from_template "$root/BASE.md" "BASE.md"
+  _mkfile_from_template "$rules_dir/coding.md" "rules/coding.md"
+  _mkfile_from_template "$rules_dir/naming.md" "rules/naming.md"
+  _mkfile_from_template "$rules_dir/structure.md" "rules/structure.md"
+  _mkfile_from_template "$root/INDEX.md" "INDEX.md"
 
 # --- Entrypoints ---
 # Claude Code: import で INDEX を読む
-  _mkfile_if_absent "CLAUDE.md" \
-"# Claude Codeエントリポイント
-
-@docs/agent/INDEX.md
-"
-
-_mkfile_if_absent "AGENTS.md" \
-"# Codexエントリポイント
-
-## 最優先
-- まずdocs/agent/INDEX.mdを読む
-- 以降の判断はINDEXの優先度ルールに従う（rulesが最優先）
-"
+  _mkfile_from_template "CLAUDE.md" "CLAUDE.md"
+  _mkfile_from_template "AGENTS.md" "AGENTS.md"
   echo "done: initialized $root (Japanese docs)"
 }
