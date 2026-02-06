@@ -16,11 +16,13 @@
 - 型定義は `type` を使用する
 - 配列型は `Array<T>` 形式を使う
 - 配列型の場合初期値は空配列 `[]` を使いOptionalにしない
+- 公開するメインコンポーネントのProps型は `Props` を使用する
 
 ## Next.js
 - App Routerを前提とする
 - UIとドメインロジックを分離する
 - page.tsxではexport defaultを使用し、それ以外ではexport constを使用する
+- page.tsx / layout.tsxではexport defaultを使用し、それ以外ではexport constを使用する
 
 # React
 - 公開するメインコンポーネントは`index.tsx` に書き `export` する

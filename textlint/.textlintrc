@@ -1,14 +1,1 @@
-{
-  "rules": {
-      "preset-ja-technical-writing": {
-          "sentence-length": {
-              max: 140
-          },
-          "ja-no-mixed-period": {
-              "allowPeriodMarks": ["．"]
-          }
-      },
-      "textlint-rule-spellcheck-tech-word": true,
-      "preset-ja-spacing": true,
-  }
-}
+
