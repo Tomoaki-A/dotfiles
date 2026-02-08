@@ -24,6 +24,7 @@ llmdoc() {
   # 生成先（デフォルト: カレント配下の docs/agent）
   local root="${1:-docs/agent}"
   local rules_dir="$root/rules"
+  local projects_dir="$root/projects"
   local repo_root
   repo_root="$(git -C "${PWD:A}" rev-parse --show-toplevel 2>/dev/null)"
   local template_root=""
@@ -36,7 +37,7 @@ llmdoc() {
     return 1
   fi
 
-  /bin/mkdir -p "$rules_dir"
+  /bin/mkdir -p "$rules_dir" "$projects_dir"
 
   _mkfile_from_template() {
     local path="$1"
