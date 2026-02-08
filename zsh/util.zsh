@@ -1,6 +1,8 @@
 alias v='nvim .'
 alias lint='eslint --fix'
 
+alias md='cd ~/Documents/Projects/md-studio && pnpm dev'
+
 alias cg="node ~/template_file_creator/dist/index.js"
 
 alias t="tmux a"
