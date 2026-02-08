@@ -4,6 +4,9 @@ alias lint='eslint --fix'
 alias cg="node ~/template_file_creator/dist/index.js"
 
 alias t="tmux a"
+alias tupd="tmux source-file ~/.tmux.conf"
+alias trs="tmux rename-session"
+
 
 tsr() {
   tmux swap-window -t +1
