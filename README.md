@@ -38,12 +38,6 @@ rm -rf ~/.config/nvim
 ln -sfn ~/dotfiles/nvim ~/.config/nvim
 ```
 
-### tmux
-
-```bash
-ln -f -n -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
-```
-
 ### lazygit
 
 ```bash
@@ -60,6 +54,22 @@ ln -f -n -s ~/dotfiles/textlint/.textlintrc ~/.textlintrc
 
 ```bash
 ln -sfn ~/dotfiles/alacritty ~/.config/alacritty
+```
+
+---
+
+## tmux のセットアップ
+
+### TPM のインストール
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+### tmux.conf のシンボリックリンク
+
+```bash
+ln -f -n -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 ```
 
 ---
@@ -145,5 +155,3 @@ defaults write -g InitialKeyRepeat -int 10
 
 - Neovim設定覚書  
   https://zenn.dev/tomoaki_a/scraps/35262759c75b90
-
-
