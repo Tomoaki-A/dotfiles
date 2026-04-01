@@ -1,3 +1,4 @@
+alias gf='git fetch'
 alias gp='git pull'
 alias gm='git merge'
 alias gma='git merge --abort'
