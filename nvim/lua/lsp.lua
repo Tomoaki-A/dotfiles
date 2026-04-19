@@ -116,11 +116,20 @@ lspconfig.eslint.setup({
   end,
 })
 
--- Typo LSPの設定
-lspconfig.cspell.setup({
+-- Typo LSPの設定 (cspell-lsp は nvim-lspconfig 未登録のためカスタム定義)
+local lsp_configs = require("lspconfig.configs")
+if not lsp_configs.cspell_lsp then
+  lsp_configs.cspell_lsp = {
+    default_config = {
+      cmd = { "cspell-lsp", "--stdio" },
+      filetypes = { "*" },
+      root_dir = lspconfig.util.root_pattern(".git"),
+      single_file_support = true,
+    },
+  }
+end
+lspconfig.cspell_lsp.setup({
   capabilities = capabilities,
-  root_dir = lspconfig.util.root_pattern(".git"),
-  cmd = { "cspell-lsp" },
 })
 
 -- Python LSPの設定
@@ -140,7 +149,7 @@ lspconfig.pyright.setup({
 })
 
 -- Ruff LSPの設定
-lspconfig.ruff_lsp.setup({
+lspconfig.ruff.setup({
   capabilities = capabilities,
   filetypes = { "python" },
   root_dir = lspconfig.util.root_pattern(

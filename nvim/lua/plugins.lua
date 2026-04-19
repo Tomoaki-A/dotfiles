@@ -9,7 +9,8 @@ Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-tree/nvim-web-devicons")
 
 -- telescope
-Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
+-- upstream のデフォルトが main (新 API 書き直し版) に切り替わったため master を明示
+Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate", ["branch"] = "master" })
 
 -- theme
 Plug("projekt0n/github-nvim-theme")
