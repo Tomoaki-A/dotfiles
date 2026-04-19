@@ -9,8 +9,10 @@ Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-tree/nvim-web-devicons")
 
 -- telescope
--- upstream のデフォルトが main (新 API 書き直し版) に切り替わったため master を明示
-Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate", ["branch"] = "master" })
+-- master ブランチには Neovim 0.12 以降のビルトイン treesitter と
+-- 衝突して conceal_line 等で nil node クラッシュを起こすレガシー
+-- predicate が残っているため、書き直し版の main ブランチを使う。
+Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate", ["branch"] = "main" })
 
 -- theme
 Plug("projekt0n/github-nvim-theme")
