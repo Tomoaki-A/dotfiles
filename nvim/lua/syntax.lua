@@ -9,6 +9,8 @@ local parsers = {
 	"scss",
 	"go",
 	"json",
+	"javascript",
+	"jsdoc",
 	"typescript",
 	"typoscript",
 	"tsx",
