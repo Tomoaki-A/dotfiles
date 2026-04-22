@@ -14,6 +14,7 @@ require("mason").setup()
 
 local servers = {
   "vtsls",
+  "vue_ls",
   "biome",
   "tailwindcss",
   "eslint",
@@ -49,6 +50,11 @@ local frontend_filetypes = {
   "svelte",
 }
 
+-- Vue Language Server (Volar) のインストール先。
+-- vtsls が .vue を解決できるよう、@vue/typescript-plugin をここから読み込ませる。
+local vue_ls_path = vim.fn.stdpath("data")
+  .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+
 -- TypeScript/JavaScript LSPの設定
 lspconfig.vtsls.setup({
   capabilities = capabilities,
@@ -57,9 +63,29 @@ lspconfig.vtsls.setup({
   root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
   single_file_support = true,
   settings = {
-    vtsls = { tsserver = { maxTsServerMemory = 4096 } },
+    vtsls = {
+      tsserver = {
+        maxTsServerMemory = 4096,
+        globalPlugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = vue_ls_path,
+            languages = { "vue" },
+            configNamespace = "typescript",
+          },
+        },
+      },
+    },
     typescript = { preferences = { importModuleSpecifier = "non-relative" } },
   },
+})
+
+-- Vue LSPの設定 (Volar hybrid mode: TS は vtsls、template/SFC 固有は vue_ls が担当)
+lspconfig.vue_ls.setup({
+  capabilities = capabilities,
+  filetypes = { "vue" },
+  root_dir = lspconfig.util.root_pattern("package.json", ".git"),
+  single_file_support = true,
 })
 
 -- Biome LSPの設定
