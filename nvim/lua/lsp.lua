@@ -198,6 +198,11 @@ lspconfig.phpactor.setup({
   filetypes = { "php" },
   root_dir = lspconfig.util.root_pattern("composer.json", ".phpactor.json", ".phpactor.yml", ".git"),
   single_file_support = true,
+  -- 起動時の "Phpstan/Psalm detected, enable extension?" プロンプトを抑制
+  init_options = {
+    ["language_server_phpstan.enabled"] = true,
+    ["language_server_psalm.enabled"] = true,
+  },
 })
 
 -- Lua LSPの設定
