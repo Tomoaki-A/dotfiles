@@ -203,7 +203,9 @@ lspconfig.phpactor.setup({
   init_options = {
     ["language_server_configuration.auto_config"] = false,
     ["language_server_phpstan.enabled"] = true,
-    ["language_server_psalm.enabled"] = true,
+    -- psalm は enabled=true にすると vendor/bin/psalm が無いプロジェクトで
+    -- 毎回エラーになるため、必要なプロジェクトだけ .phpactor.json で有効化する
+    ["language_server_psalm.enabled"] = false,
   },
 })
 
