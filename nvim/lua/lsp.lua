@@ -23,6 +23,7 @@ local servers = {
   "stylua",
   "lua_ls",
   "graphql",
+  "phpactor",
 }
 
 local unsupported_servers = { "cspell-lsp" }
@@ -187,6 +188,15 @@ lspconfig.ruff.setup({
     "Pipfile.lock",
     ".git"
   ),
+  single_file_support = true,
+})
+
+-- PHP LSPの設定
+lspconfig.phpactor.setup({
+  capabilities = capabilities,
+  cmd = { vim.fn.stdpath("data") .. "/mason/bin/phpactor", "language-server" },
+  filetypes = { "php" },
+  root_dir = lspconfig.util.root_pattern("composer.json", ".phpactor.json", ".phpactor.yml", ".git"),
   single_file_support = true,
 })
 
