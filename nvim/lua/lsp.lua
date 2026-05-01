@@ -198,8 +198,10 @@ lspconfig.phpactor.setup({
   filetypes = { "php" },
   root_dir = lspconfig.util.root_pattern("composer.json", ".phpactor.json", ".phpactor.yml", ".git"),
   single_file_support = true,
-  -- 起動時の "Phpstan/Psalm detected, enable extension?" プロンプトを抑制
+  -- 起動時の "Phpstan/Psalm detected, enable extension?" プロンプトを抑制し、
+  -- 拡張は明示的に有効化する
   init_options = {
+    ["language_server_configuration.auto_config"] = false,
     ["language_server_phpstan.enabled"] = true,
     ["language_server_psalm.enabled"] = true,
   },
