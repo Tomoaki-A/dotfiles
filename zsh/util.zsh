@@ -16,7 +16,7 @@ tsr() {
 tsl() {
   tmux swap-window -t -1
 }
-alias c='claude'
+alias c='docker sandbox run claude'
 
 # 雑誌: docs/agent の日本語ドキュメント雛形を一括生成
 ldocinit() {
