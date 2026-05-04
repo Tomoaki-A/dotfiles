@@ -23,6 +23,7 @@ local servers = {
   "stylua",
   "lua_ls",
   "graphql",
+  "phpactor",
 }
 
 local unsupported_servers = { "cspell-lsp" }
@@ -188,6 +189,24 @@ lspconfig.ruff.setup({
     ".git"
   ),
   single_file_support = true,
+})
+
+-- PHP LSPの設定
+lspconfig.phpactor.setup({
+  capabilities = capabilities,
+  cmd = { vim.fn.stdpath("data") .. "/mason/bin/phpactor", "language-server" },
+  filetypes = { "php" },
+  root_dir = lspconfig.util.root_pattern("composer.json", ".phpactor.json", ".phpactor.yml", ".git"),
+  single_file_support = true,
+  -- 起動時の "Phpstan/Psalm detected, enable extension?" プロンプトを抑制し、
+  -- 拡張は明示的に有効化する
+  init_options = {
+    ["language_server_configuration.auto_config"] = false,
+    ["language_server_phpstan.enabled"] = true,
+    -- psalm は enabled=true にすると vendor/bin/psalm が無いプロジェクトで
+    -- 毎回エラーになるため、必要なプロジェクトだけ .phpactor.json で有効化する
+    ["language_server_psalm.enabled"] = false,
+  },
 })
 
 -- Lua LSPの設定
