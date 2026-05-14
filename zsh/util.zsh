@@ -9,6 +9,32 @@ alias t="tmux a"
 alias tupd="tmux source-file ~/.tmux.conf"
 alias trs="tmux rename-session"
 
+# PCのキャッシュを一括削除して空き容量を増やす（Homebrew、Docker、ブラウザ、VSCode、Figma、Slackなど）
+alias cleanup-dev-cache='
+rm -rf \
+~/Library/Caches/company.thebrowser.Browser \
+~/Library/Caches/Arc \
+~/Library/Caches/Google \
+~/Library/Caches/com.microsoft.VSCodeInsiders.ShipIt \
+~/Library/Caches/com.microsoft.VSCodeInsiders \
+~/Library/Caches/com.figma.Desktop.ShipIt \
+~/Library/Caches/com.tinyspeck.slackmacgap.ShipIt \
+~/Library/Caches/notion.id.ShipIt \
+~/Library/Caches/Homebrew \
+~/Library/Caches/node-gyp \
+~/Library/Caches/pnpm \
+~/Library/Caches/pip \
+~/Library/Caches/typescript \
+~/Library/Caches/dev.biomejs.biome \
+~/.npm/_cacache \
+~/.cache/pnpm \
+~/.cache/yarn \
+~/.cache/pip && \
+brew cleanup -s && \
+docker builder prune -af && \
+df -h
+'
+
 
 tsr() {
   tmux swap-window -t +1
