@@ -20,6 +20,7 @@ local parsers = {
 	"prisma",
 	"sql",
 	"yaml",
+	"svelte",
 	-- LSP hover やドキュメント表示で markdown ハイライトを使うため必須
 	"markdown",
 	"markdown_inline",

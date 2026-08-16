@@ -94,8 +94,7 @@ lspconfig.biome.setup({
   capabilities = capabilities,
   cmd = { vim.fn.stdpath("data") .. "/mason/bin/biome", "lsp" },
   filetypes = frontend_filetypes,
-  root_dir = lspconfig.util.root_pattern("biome.json", ".biomerc", ".git"),
-  single_file_support = true,
+  root_dir = lspconfig.util.root_pattern("biome.json", "biome.jsonc"),
 })
 
 -- Tailwind CSS LSPの設定

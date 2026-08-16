@@ -4,27 +4,43 @@ local function get_ts_ls_root_dir()
   return root(vim.fn.getcwd())
 end
 
+-- BufWritePre: LSP経由で biome がバッファを整形してから書き込む
 vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.css" },
+  callback = function()
+    local root_dir = get_ts_ls_root_dir()
+    local node_modules = root_dir and vim.fn.finddir("node_modules", root_dir .. ";") or ""
+    if node_modules == "" then
+      return
+    end
+
+    local biome_path = node_modules .. "/.bin/biome"
+    if vim.fn.filereadable(biome_path) == 1 then
+      vim.lsp.buf.format({ name = "biome", async = false })
+    end
+  end,
+})
+
+-- BufWritePost: 書き込み後にファイルへ直接 eslint/prettier を適用して再読み込み
+vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.css" },
   callback = function()
     local filepath = vim.fn.expand("%:p")
     local root_dir = get_ts_ls_root_dir()
     local node_modules = root_dir and vim.fn.finddir("node_modules", root_dir .. ";") or ""
     if node_modules == "" then
-      return -- node_modules がなければ何もしない
+      return
     end
 
     local biome_path = node_modules .. "/.bin/biome"
     local eslint_path = node_modules .. "/.bin/eslint"
     local prettier_path = node_modules .. "/.bin/prettier"
 
-    --  Biome があれば最優先で実行
+    -- biome がある場合は BufWritePre で処理済み
     if vim.fn.filereadable(biome_path) == 1 then
-      vim.lsp.buf.format({ name = "biome", async = false, })
       return
     end
 
-    -- SLint → Prettier の順で実行（両方ローカルにある場合のみ）
     local ran = false
 
     if vim.fn.filereadable(eslint_path) == 1 then
@@ -42,6 +58,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
   end,
 })
+
 -- pythonの保存時にruffで自動修正
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*.py",
