@@ -1,7 +1,11 @@
 -- ルートディレクトリを決定
+-- .git だけだとリポジトリルートで止まり、node_modules がある frontend/apps/karte まで
+-- 降りてこない（node_modules はリポジトリルートの下の階層にしかない）。
+-- package.json/biome.json も候補に入れ、検索の起点も cwd ではなく
+-- 「編集中ファイルのディレクトリ」にする（cwd がどこでも正しく解決するように）。
 local function get_ts_ls_root_dir()
-  local root = require("lspconfig.util").root_pattern(".git")
-  return root(vim.fn.getcwd())
+  local root = require("lspconfig.util").root_pattern("biome.json", "package.json", ".git")
+  return root(vim.fn.expand("%:p:h"))
 end
 
 -- BufWritePre: LSP経由で biome がバッファを整形してから書き込む
