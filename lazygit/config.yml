@@ -16,7 +16,7 @@ customCommands:
     context: "files"
     description: 'hoge'
     subprocess: true
-    command: "echo -n {{.SelectedPath}} | pbcopy"
+    command: "printf '%s' '{{.SelectedPath}}' | pbcopy"
   - key: "C"
     context: "files"
     description: 'commit files with aicommits'

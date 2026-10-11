@@ -90,11 +90,23 @@ lspconfig.vue_ls.setup({
 })
 
 -- Biome LSPの設定
+-- プロジェクトに node_modules/.bin/biome があればそれを優先して使う。
+-- mason の biome はグローバル更新で 2.x に上がりがちだが、プロジェクトの
+-- biome.json が 1.x スキーマのままだと 2.x はその設定を読めず（unknown key /
+-- schema mismatch）、LSP は起動しても documentFormattingProvider を出さないため
+-- 保存時整形が無反応になる。プロジェクトローカルを使えば設定とバージョンが一致する。
 lspconfig.biome.setup({
   capabilities = capabilities,
-  cmd = { vim.fn.stdpath("data") .. "/mason/bin/biome", "lsp" },
   filetypes = frontend_filetypes,
   root_dir = lspconfig.util.root_pattern("biome.json", "biome.jsonc"),
+  on_new_config = function(new_config, root_dir)
+    local local_biome = root_dir .. "/node_modules/.bin/biome"
+    if vim.fn.filereadable(local_biome) == 1 then
+      new_config.cmd = { local_biome, "lsp-proxy" }
+    else
+      new_config.cmd = { vim.fn.stdpath("data") .. "/mason/bin/biome", "lsp-proxy" }
+    end
+  end,
 })
 
 -- Tailwind CSS LSPの設定
@@ -119,16 +131,22 @@ lspconfig.tailwindcss.setup({
 lspconfig.eslint.setup({
   capabilities = capabilities,
   filetypes = frontend_filetypes,
+  -- ESLint 設定ファイルが実在するプロジェクトでのみアタッチする。
+  -- package.json/.git を含めると、Biome 移行済みで eslint 設定を持たない
+  -- プロジェクトにも常にアタッチしてしまい、pull diagnostics のたびに
+  -- "Could not find config file" (-32603) を返してインサートモードが激重になる。
   root_dir = lspconfig.util.root_pattern(
+    "eslint.config.js",
+    "eslint.config.mjs",
+    "eslint.config.cjs",
+    "eslint.config.ts",
     ".eslintrc.js",
     ".eslintrc.cjs",
     ".eslintrc.json",
     ".eslintrc.yaml",
-    ".eslintrc.yml",
-    "package.json",
-    ".git"
+    ".eslintrc.yml"
   ),
-  single_file_support = true,
+  single_file_support = false,
 
   on_init = function(client)
     -- LSP 側から送られる「Unable to find ESLint library.」メッセージを潰す
